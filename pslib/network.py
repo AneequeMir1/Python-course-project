@@ -29,7 +29,7 @@ def create_test_network():
         net, hv_bus=bhv, lv_bus=blv,
         sn_mva=1, vn_hv_kv=33, vn_lv_kv=0.415,
         vkr_percent=0.1, vk_percent=4,
-        pfe_kw=0, i0_percent=0,  # ← These were missing!
+        pfe_kw=0, i0_percent=0,
         shift_degree=0, name="Main_TX"
     )
 
@@ -65,3 +65,19 @@ def run_powerflow(net):
     None on success (pandapower convention)
     """
     pp.runpp(net)
+
+
+def plot_results(net):
+    """Plot network with power flow results.
+
+    Parameters
+    ----------
+    net : pandapower network (after run_powerflow)
+
+    Returns
+    -------
+    fig : plotly figure
+    """
+    import pandapower.plotting as pplot
+    fig = pplot.simple_plotly(net, respect_switches=False)  # FIXED: no unpack
+    return fig

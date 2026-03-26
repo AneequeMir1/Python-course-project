@@ -1,5 +1,5 @@
 import pytest
-from pslib.network import create_test_network, create_loads, run_powerflow
+from pslib.network import create_test_network, create_loads, run_powerflow, plot_results  # ← ALL 4
 import pandapower as pp
 
 
@@ -20,3 +20,11 @@ def test_run_powerflow():
     create_loads(net, 1, -0.006, -0.0029)
     run_powerflow(net)  # No return value expected
     assert hasattr(net, 'res_bus') and len(net.res_bus) > 0
+
+
+def test_plot_results():
+    net = create_test_network()
+    create_loads(net, 1, -0.006, -0.0029)
+    run_powerflow(net)
+    fig = plot_results(net)
+    assert fig is not None
