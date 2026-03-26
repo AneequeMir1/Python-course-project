@@ -51,3 +51,17 @@ def create_loads(net, bus, p_mw, q_mvar):
     load_idx : int
     """
     return pp.create_load(net, bus=bus, p_mw=p_mw, q_mvar=q_mvar, name="Residential")
+
+
+def run_powerflow(net):
+    """Run power flow calculation.
+
+    Parameters
+    ----------
+    net : pandapower network
+
+    Returns
+    -------
+    None on success (pandapower convention)
+    """
+    pp.runpp(net)
