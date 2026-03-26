@@ -34,3 +34,20 @@ def create_test_network():
     )
 
     return net
+
+
+def create_loads(net, bus, p_mw, q_mvar):
+    """Add residential loads to LV bus.
+
+    Parameters
+    ----------
+    net : pandapower network
+    bus : int, bus index
+    p_mw : float, active power (negative for load)
+    q_mvar : float, reactive power
+
+    Returns
+    -------
+    load_idx : int
+    """
+    return pp.create_load(net, bus=bus, p_mw=p_mw, q_mvar=q_mvar, name="Residential")
